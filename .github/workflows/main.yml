@@ -1,9 +1,12 @@
-
 name: project2
-on: push
+
+on: 
+  push:
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -20,6 +23,7 @@ jobs:
         run: npm run build
 
   test:
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
@@ -38,6 +42,7 @@ jobs:
         run: npm test
 
   deploy:
+    needs: test
     runs-on: ubuntu-latest
 
     steps:
